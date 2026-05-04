@@ -1,0 +1,40 @@
+resources:
+
+  jobs:
+    data-ingestion:
+      name: Job to ingest Data From API into Bronze Layer
+
+      job_clusters:
+        - job_cluster_key: ifood_eng_cluster_spec
+          new_cluster:
+            spark_version: "15.4.x-scala2.12"
+            node_type_id: "m5d.xlarge"
+            runtime_engine: "PHOTON"
+            num_workers: 1
+            custom_tags:
+              ResourceOwner: "JosueLui"
+              Project: "iFood-Data-Eng"
+            aws_attributes:
+              availability: "SPOT_WITH_FALLBACK"
+              zone_id: 'us-east-2'
+            data_security_mode: "SINGLE_USER"
+
+      tasks:
+
+        - task_key: yellow_taxi_tripdata
+          job_cluster_key: ifood_eng_cluster_spec
+          notebook_task:
+            notebook_path: ../src/ingestion.ipynb
+            base_parameters:
+              env: 'dev'
+              source_data: 'yellow_taxi'
+
+        - task_key: green_taxi_tripdata
+          job_cluster_key: ifood_eng_cluster_spec
+          depends_on:
+            - task_key: yellow_taxi_tripdata
+          notebook_task:
+            notebook_path: ../src/ingestion.ipynb
+            base_parameters:
+              env: 'dev'
+              source_data: 'green_taxi'
