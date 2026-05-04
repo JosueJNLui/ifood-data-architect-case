@@ -23,18 +23,24 @@ resources:
 
         - task_key: yellow_taxi_tripdata
           job_cluster_key: ifood_eng_cluster_spec
+          max_retries: 3
+          min_retry_interval_millis: 5000 
+          retry_on_timeout: true
           notebook_task:
-            notebook_path: ../src/ingestion.ipynb
+            notebook_path: ../src/01_bronze_api_ingestion.ipynb
             base_parameters:
               env: 'dev'
-              source_data: 'yellow_taxi'
+              source: 'yellow_taxi'
 
         - task_key: green_taxi_tripdata
           job_cluster_key: ifood_eng_cluster_spec
+          max_retries: 3
+          min_retry_interval_millis: 5000 
+          retry_on_timeout: true
           depends_on:
             - task_key: yellow_taxi_tripdata
           notebook_task:
-            notebook_path: ../src/ingestion.ipynb
+            notebook_path: ../src/01_bronze_api_ingestion.ipynb
             base_parameters:
               env: 'dev'
-              source_data: 'green_taxi'
+              source: 'green_taxi'
