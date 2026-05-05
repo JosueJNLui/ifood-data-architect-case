@@ -1,0 +1,15 @@
+resources:
+
+  pipelines:
+  
+    dlt-silver-pipeline:
+      name: dlt_silver_pipeline
+      catalog: logistics
+      schema: silver
+      serverless: true
+      development: true
+      continuous: false
+      
+      libraries:
+        - notebook:
+            path: ../src/02_silver_taxi_ingestion_dq.ipynb
