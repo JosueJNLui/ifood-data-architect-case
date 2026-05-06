@@ -2,8 +2,8 @@ resources:
 
   pipelines:
   
-    dlt-silver-pipeline:
-      name: dlt_silver_pipeline
+    dlt-logistics-pipeline:
+      name: dlt_logistics_medallion
       catalog: logistics
       schema: silver
       serverless: true
@@ -13,3 +13,5 @@ resources:
       libraries:
         - notebook:
             path: ../src/02_silver_taxi_ingestion_dq.ipynb
+        - notebook:
+            path: ../src/03_gold_taxi_fact.ipynb
