@@ -93,7 +93,7 @@ NYC Open Data API
 ### 1. Clonar o repositório
 
 ```bash
-git clone https://github.com/<seu-usuario>/ifood-data-architect-case.git
+git clone https://github.com/JosueJNLui/ifood-data-architect-case.git
 cd ifood-data-architect-case
 ```
 
