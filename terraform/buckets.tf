@@ -5,7 +5,7 @@
 
 module "s3_buckets" {
 
-  for_each = contains(local.dev_and_prod_envs, terraform.workspace) ? toset(local.layers) : []
+  for_each = contains(local.dev_and_prod_envs, terraform.workspace) ? toset(local.schemas) : []
 
   # Module version
   source = "terraform-aws-modules/s3-bucket/aws"
@@ -19,7 +19,7 @@ module "s3_buckets" {
   # Additional tags
   tags = {
     "project" = local.project,
-    "layer"   = each.value
+    "schemas"   = each.value
   }
 
 }

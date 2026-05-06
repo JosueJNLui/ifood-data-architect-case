@@ -15,5 +15,5 @@ locals {
   aws_profile    = var.aws_profile
   aws_account_id = data.aws_caller_identity.current.account_id
   project        = var.project
-  layers         = ["bronze", "silver", "gold"]
+  schemas        = ["bronze", "metastore"]
 }
